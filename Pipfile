@@ -13,6 +13,8 @@ isort = "*"
 django = "*"
 psycopg2-binary = "*"
 pytest-asyncio = "*"
+channels = "*"
+channels-redis = "*"
 
 [requires]
 python_version = "3.8"

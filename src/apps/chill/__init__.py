@@ -1,1 +1,1 @@
-default_app_config = 'src.apps.chill.apps.ChillConfig'
+default_app_config = 'apps.chill.apps.ChillConfig'
