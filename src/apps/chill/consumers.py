@@ -22,14 +22,26 @@ class ChillConsumer(WebsocketConsumer):
 
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
+        action = text_data_json['action']
         message = text_data_json['message']
+        user = text_data_json['user']['name']
+        if action == 'game':
+            pass
+        elif action == 'chat-message':
+            message = self.handle_chat_message(message, user)
         async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
             {
                 'type': 'comment_message',
+                'action': action,
                 'message': message,
+                'user': user,
             }
         )
 
     def comment_message(self, event):
         self.send(text_data=json.dumps(event))
+
+    @staticmethod
+    def handle_chat_message(message, user):
+        return f'{user}: {message}'
